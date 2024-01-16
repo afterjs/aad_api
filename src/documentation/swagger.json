@@ -1,0 +1,1618 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a documentation of the WeBuild API. ",
+        "version": "1.0.0",
+        "title": "WeBuild API",
+        "contact": {
+            "email": "ipca@ipca.pt"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Employee Endpoints",
+            "description": "Endpoints Employes routes"
+        },
+        {
+            "name": "Info Endpoints",
+            "description": "Informations about the API"
+        },
+        {
+            "name": "Material Endpoints",
+            "description": "Endpoints Material routes"
+        },
+        {
+            "name": "Project Endpoints",
+            "description": "Endpoints Project routes"
+        },
+        {
+            "name": "Speciality Endpoints",
+            "description": "Endpoints Speciality routes"
+        }
+    ],
+    "paths": {
+        "/info/version": {
+            "get": {
+                "tags": [
+                    "Info Endpoints"
+                ],
+                "summary": "Get the version of the API",
+                "description": "This endpoint returns the version of the API",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "example": "WEBUILD API"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "API INFORMATION"
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "example": "1.0.0"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/info/status": {
+            "get": {
+                "tags": [
+                    "Info Endpoints"
+                ],
+                "summary": "Get the current status of API",
+                "description": "This endpoint returns the status of the API",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "API STATUS"
+                                },
+                                "status": {
+                                    "type": "object",
+                                    "properties": {
+                                        "messages": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        },
+                                        "status-code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2022-04-27T12:31:44.883Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/info/": {
+            "get": {
+                "tags": [
+                    "Info Endpoints"
+                ],
+                "summary": "Get all information about the API",
+                "description": "This endpoint returns all information about the API",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "API STATUS"
+                                },
+                                "info": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Current version of the API"
+                                        },
+                                        "version": {
+                                            "type": "string",
+                                            "example": "1.0.0"
+                                        }
+                                    }
+                                },
+                                "status": {
+                                    "type": "object",
+                                    "properties": {
+                                        "messages": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        },
+                                        "status-code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2022-04-27T12:31:44.883Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/material/": {
+            "get": {
+                "tags": [
+                    "Material Endpoints"
+                ],
+                "summary": "Get all materials",
+                "description": "This endpoint returns all materials data",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "idMat": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "Nome": {
+                                                "type": "string",
+                                                "example": "Capacete"
+                                            },
+                                            "Descricao": {
+                                                "type": "string",
+                                                "example": "Capacete branco"
+                                            },
+                                            "Preco": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 50.5
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Material Endpoints"
+                ],
+                "summary": "Create a new material",
+                "description": "This endpoint will create a new material and return the material data",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "material",
+                        "description": "Should be the material object data to create a new one",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Nome": {
+                                    "type": "string",
+                                    "example": "Cimento"
+                                },
+                                "Descricao": {
+                                    "type": "string",
+                                    "example": "Cimento 1kg"
+                                },
+                                "Preco": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 50.5
+                                }
+                            },
+                            "required": [
+                                "Nome",
+                                "Descricao",
+                                "Preco"
+                            ]
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "material created successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Material created successfully"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "idMat": {
+                                            "type": "integer",
+                                            "example": 3
+                                        },
+                                        "Nome": {
+                                            "type": "string",
+                                            "example": "Cimento"
+                                        },
+                                        "Descricao": {
+                                            "type": "string",
+                                            "example": "Cimento 1kg"
+                                        },
+                                        "Preco": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 50.5
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Material with the same name already exists"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error: [error message]"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/material/{idMat}": {
+            "put": {
+                "tags": [
+                    "Material Endpoints"
+                ],
+                "summary": "Update a material data",
+                "description": "This endpoint will update a material account",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Material ID",
+                        "required": true,
+                        "type": "integer",
+                        "example": 3
+                    },
+                    {
+                        "name": "material object",
+                        "in": "body",
+                        "description": "material data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Nome": {
+                                    "type": "string",
+                                    "example": "Cimento"
+                                },
+                                "Descricao": {
+                                    "type": "string",
+                                    "example": "Cimento 1kg"
+                                },
+                                "Preco": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 50.5
+                                }
+                            },
+                            "required": [
+                                "Nome",
+                                "Descricao",
+                                "Preco"
+                            ]
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Material updated successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Material updated successfully"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "idMat": {
+                                            "type": "integer",
+                                            "example": 3
+                                        },
+                                        "Nome": {
+                                            "type": "string",
+                                            "example": "Cimento"
+                                        },
+                                        "Descricao": {
+                                            "type": "string",
+                                            "example": "Cimento 1kg"
+                                        },
+                                        "Preco": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 50.5
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Material not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Material does not exist"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error: [error message]"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/project/": {
+            "post": {
+                "tags": [
+                    "Project Endpoints"
+                ],
+                "summary": "Create a new project and associate employees",
+                "description": "This endpoint will create a new project and return the material data",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "project",
+                        "description": "Should be the project object data to create a new one",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Nome": {
+                                    "type": "string",
+                                    "example": "John Doe"
+                                },
+                                "Morada": {
+                                    "type": "string",
+                                    "example": "123 Main St"
+                                },
+                                "codigoPostal": {
+                                    "type": "string",
+                                    "example": "12345"
+                                },
+                                "Localidade": {
+                                    "type": "string",
+                                    "example": "Cityville"
+                                },
+                                "DataInicio": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "2024-01-15"
+                                },
+                                "DataFim": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "2024-01-30"
+                                },
+                                "Descricao": {
+                                    "type": "string",
+                                    "example": "This is a description of the data."
+                                },
+                                "idFuncionario": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                }
+                            },
+                            "required": [
+                                "Nome",
+                                "Morada",
+                                "codigoPostal",
+                                "Localidade",
+                                "DataInicio",
+                                "DataFim",
+                                "Descricao",
+                                "idFuncionario"
+                            ]
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project created successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Project created successfully"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "idProjeto": {
+                                            "type": "integer",
+                                            "example": 17
+                                        },
+                                        "Nome": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "Morada": {
+                                            "type": "string",
+                                            "example": "123 Main St"
+                                        },
+                                        "CodigoPostal": {
+                                            "type": "string",
+                                            "example": "12345"
+                                        },
+                                        "DataInicio": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-01-15T00:00:00.000Z"
+                                        },
+                                        "DataFim": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-01-30T00:00:00.000Z"
+                                        },
+                                        "Descricao": {
+                                            "type": "string",
+                                            "example": "This is a description of the data."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Foreign key constraint violation. The referenced record does not exist. Violated constraint: [constraintName]"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error message details"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "User not found. [error details]. Cannot create project"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error message details"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error message details"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/project/projects": {
+            "get": {
+                "tags": [
+                    "Project Endpoints"
+                ],
+                "summary": "Get all the project",
+                "description": "This endpoint will get all the project data",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All the project data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Get all the projects"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "idProjeto": {
+                                                "type": "integer",
+                                                "example": 17
+                                            },
+                                            "Nome": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "Morada": {
+                                                "type": "string",
+                                                "example": "123 Main St"
+                                            },
+                                            "CodigoPostal": {
+                                                "type": "string",
+                                                "example": "12345"
+                                            },
+                                            "DataInicio": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-01-15T00:00:00.000Z"
+                                            },
+                                            "DataFim": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-01-30T00:00:00.000Z"
+                                            },
+                                            "Descricao": {
+                                                "type": "string",
+                                                "example": "This is a description of the data."
+                                            },
+                                            "Localidade": {
+                                                "type": "string",
+                                                "example": "tuga"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error message details"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/project/{idProjeto}": {
+            "delete": {
+                "tags": [
+                    "Project Endpoints"
+                ],
+                "summary": "Delete project and associated employee",
+                "description": "This endpoint will delete one project and associated employee",
+                "parameters": [
+                    {
+                        "name": "idProjeto",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "type": "integer",
+                        "example": 3
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project deleted with success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Project deleted"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Cannot delete project with associated records."
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Project with idProjeto 55 does not exist."
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Project Endpoints"
+                ],
+                "summary": "Update a project",
+                "description": "This endpoint will update a project",
+                "parameters": [
+                    {
+                        "name": "idProjeto",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "type": "integer",
+                        "example": 3
+                    },
+                    {
+                        "in": "body",
+                        "name": "project",
+                        "description": "Should be the project object data to update",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Nome": {
+                                    "type": "string",
+                                    "example": "John Doe"
+                                },
+                                "Morada": {
+                                    "type": "string",
+                                    "example": "123 Main St"
+                                },
+                                "codigoPostal": {
+                                    "type": "string",
+                                    "example": "12345"
+                                },
+                                "Localidade": {
+                                    "type": "string",
+                                    "example": "Cityville"
+                                },
+                                "DataInicio": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "2024-01-15"
+                                },
+                                "DataFim": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "2024-01-30"
+                                },
+                                "Descricao": {
+                                    "type": "string",
+                                    "example": "This is a description of the data."
+                                }
+                            },
+                            "required": [
+                                "Nome",
+                                "Morada",
+                                "codigoPostal",
+                                "Localidade",
+                                "DataInicio",
+                                "DataFim",
+                                "Descricao"
+                            ]
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project updated successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Project updated successfully"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "idProjeto": {
+                                            "type": "integer",
+                                            "example": 15
+                                        },
+                                        "Nome": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "Morada": {
+                                            "type": "string",
+                                            "example": "123 Main St"
+                                        },
+                                        "codigoPostal": {
+                                            "type": "string",
+                                            "example": "12345"
+                                        },
+                                        "Localidade": {
+                                            "type": "string",
+                                            "example": "Cityville"
+                                        },
+                                        "DataInicio": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-01-15"
+                                        },
+                                        "DataFim": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-01-30"
+                                        },
+                                        "Descricao": {
+                                            "type": "string",
+                                            "example": "This is a description of the data."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Project not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Project not found"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/project/{idProjeto}/residents/{minAge}": {
+            "get": {
+                "tags": [
+                    "Project Endpoints"
+                ],
+                "summary": "Get all residents associated with a project by the project ID and minimum resident age",
+                "description": "This endpoint will get all residents associated with a project by a minimum age",
+                "parameters": [
+                    {
+                        "name": "idProjeto",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "type": "integer",
+                        "example": 15
+                    },
+                    {
+                        "name": "minAge",
+                        "in": "path",
+                        "description": "Minimum age",
+                        "required": true,
+                        "type": "integer",
+                        "example": 20
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data returned with success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "NomeProjeto": {
+                                                "type": "string",
+                                                "example": "ola Doe"
+                                            },
+                                            "MoradaProjeto": {
+                                                "type": "string",
+                                                "example": "awgwag"
+                                            },
+                                            "LocalidadeProjeto": {
+                                                "type": "string",
+                                                "example": "tuga"
+                                            },
+                                            "CodigoPostalProjeto": {
+                                                "type": "string",
+                                                "example": "12345"
+                                            },
+                                            "DataInicioProjeto": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2022-01-12T00:00:00.000Z"
+                                            },
+                                            "DataFimProjeto": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2022-01-12T00:00:00.000Z"
+                                            },
+                                            "DescricaoProjeto": {
+                                                "type": "string",
+                                                "example": "Some description"
+                                            },
+                                            "ProjetoCodigoPostal": {
+                                                "type": "string",
+                                                "example": "tuga"
+                                            },
+                                            "ResidenteID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "NomeResidente": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "CursoResidente": {
+                                                "type": "string",
+                                                "example": "Computer Science"
+                                            },
+                                            "IdadeResidente": {
+                                                "type": "integer",
+                                                "example": 22
+                                            },
+                                            "QuartoResidente": {
+                                                "type": "integer",
+                                                "example": 101
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/project/employees/{idProjeto}": {
+            "get": {
+                "tags": [
+                    "Project Endpoints"
+                ],
+                "summary": "Get all employees associated with project and project information by project ID",
+                "description": "This endpoint will get all employees associated with project and project information by project ID",
+                "parameters": [
+                    {
+                        "name": "idProjeto",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "type": "integer",
+                        "example": 15
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data returned with success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "IdProjeto": {
+                                                "type": "integer",
+                                                "example": 15
+                                            },
+                                            "NomeProjeto": {
+                                                "type": "string",
+                                                "example": "ola Doe"
+                                            },
+                                            "CodigoPostalProjeto": {
+                                                "type": "string",
+                                                "example": "12345"
+                                            },
+                                            "CodigoPostalFuncionario": {
+                                                "type": "string",
+                                                "example": "4975-366"
+                                            },
+                                            "IdDepartamento": {
+                                                "type": "integer",
+                                                "example": 2
+                                            },
+                                            "NomeDepartamento": {
+                                                "type": "string",
+                                                "example": "Eletricidade"
+                                            },
+                                            "IdFuncionario": {
+                                                "type": "integer",
+                                                "example": 18
+                                            },
+                                            "NomeFuncionario": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "idEspecialidade": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "NomeEspecialidade": {
+                                                "type": "string",
+                                                "example": "Eletricista"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/employee/": {
+            "post": {
+                "tags": [
+                    "Employee Endpoints"
+                ],
+                "summary": "Create a new employee",
+                "description": "This endpoint will create an employee and return the object data",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "employee",
+                        "description": "Should be the employee object data to create a new one",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Nome": {
+                                    "type": "string",
+                                    "example": "Exemplo"
+                                },
+                                "Telefone": {
+                                    "type": "integer",
+                                    "example": 123654789
+                                },
+                                "Morada": {
+                                    "type": "string",
+                                    "example": "Rua do Exemplo"
+                                },
+                                "idEspecialidade": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "idDepartamento": {
+                                    "type": "integer",
+                                    "example": 2
+                                },
+                                "codigoPostal": {
+                                    "type": "string",
+                                    "example": "4925-366"
+                                },
+                                "Localidade": {
+                                    "type": "string",
+                                    "example": "Exemploville"
+                                }
+                            },
+                            "required": [
+                                "Nome",
+                                "Telefone",
+                                "Morada",
+                                "idEspecialidade",
+                                "idDepartamento",
+                                "codigoPostal",
+                                "Localidade"
+                            ]
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee created successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Employee created successfully"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "idFuncionario": {
+                                            "type": "integer",
+                                            "example": 29
+                                        },
+                                        "Nome": {
+                                            "type": "string",
+                                            "example": "Exemplo"
+                                        },
+                                        "Telefone": {
+                                            "type": "integer",
+                                            "example": 123654789
+                                        },
+                                        "Morada": {
+                                            "type": "string",
+                                            "example": "Rua do Exemplo"
+                                        },
+                                        "CodigoPostal": {
+                                            "type": "string",
+                                            "example": "4925-366"
+                                        },
+                                        "idEspecialidade": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "idDepartamento": {
+                                            "type": "integer",
+                                            "example": 2
+                                        }
+                                    },
+                                    "required": [
+                                        "idFuncionario",
+                                        "Nome",
+                                        "Telefone",
+                                        "Morada",
+                                        "CodigoPostal",
+                                        "idEspecialidade",
+                                        "idDepartamento"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Foreign key constraint violation. The referenced record does not exist."
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/speciality/": {
+            "get": {
+                "tags": [
+                    "Speciality Endpoints"
+                ],
+                "summary": "Get all the specialities",
+                "description": "This endpoint returns all specialities data",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "idEspecialidade": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "Nome": {
+                                                "type": "string",
+                                                "example": "Eletricista"
+                                            },
+                                            "Descricao": {
+                                                "type": "string",
+                                                "example": "Blablabla"
+                                            }
+                                        },
+                                        "required": [
+                                            "idEspecialidade",
+                                            "Nome",
+                                            "Descricao"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "data"
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Speciality Endpoints"
+                ],
+                "summary": "Create a new Speciality",
+                "description": "This endpoint will create a new speciality and return the speciality data",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "speciality",
+                        "description": "Should be the speciality object data to create a new one",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Nome": {
+                                    "type": "string",
+                                    "example": "Eletricista"
+                                },
+                                "Descricao": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum lorem ipsum"
+                                }
+                            },
+                            "required": [
+                                "Nome",
+                                "Descricao"
+                            ]
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "speciality created successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Speciality created successfully"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "idEspecialidade": {
+                                            "type": "integer",
+                                            "example": 7
+                                        },
+                                        "Nome": {
+                                            "type": "string",
+                                            "example": "Eletrficista"
+                                        },
+                                        "Descricao": {
+                                            "type": "string",
+                                            "example": "Lorem ipsum lorem ipsum"
+                                        }
+                                    },
+                                    "required": [
+                                        "idEspecialidade",
+                                        "Nome",
+                                        "Descricao"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "message",
+                                "data"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Specialty with the same name already exists"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/speciality/{idEspecialidade}": {
+            "delete": {
+                "tags": [
+                    "Speciality Endpoints"
+                ],
+                "summary": "Delete speciality by id",
+                "description": "This endpoint will delete one speciality",
+                "parameters": [
+                    {
+                        "name": "idEspecialidade",
+                        "in": "path",
+                        "description": "Speciality ID",
+                        "required": true,
+                        "type": "integer",
+                        "example": 3
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Speciality deleted with success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Speciality deleted"
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Cannot delete speciality with associated records."
+                                }
+                            },
+                            "required": [
+                                "error"
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Speciality does not exist"
+                                }
+                            },
+                            "required": [
+                                "error"
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            },
+                            "required": [
+                                "error"
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Speciality Endpoints"
+                ],
+                "summary": "Update a speciality by id",
+                "description": "This endpoint will update a speciality",
+                "parameters": [
+                    {
+                        "name": "idEspecialidade",
+                        "in": "path",
+                        "description": "Speciality ID",
+                        "required": true,
+                        "type": "integer",
+                        "example": 3
+                    },
+                    {
+                        "in": "body",
+                        "name": "speciality",
+                        "description": "Should be the speciality object data to update",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Nome": {
+                                    "type": "string",
+                                    "example": "Calceteiro"
+                                },
+                                "Descricao": {
+                                    "type": "string",
+                                    "example": "lorem ipsum"
+                                }
+                            },
+                            "required": [
+                                "Nome",
+                                "Descricao"
+                            ]
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Speciality updated successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Speciality updated successfully"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "idEspecialidade": {
+                                            "type": "integer",
+                                            "example": 15
+                                        },
+                                        "Nome": {
+                                            "type": "string",
+                                            "example": "Calceteiro"
+                                        },
+                                        "Descricao": {
+                                            "type": "string",
+                                            "example": "Lorem ipsum"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Speciality does not exist"
+                                }
+                            },
+                            "required": [
+                                "error"
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            },
+                            "required": [
+                                "error"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
